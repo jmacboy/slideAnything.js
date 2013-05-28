@@ -12,59 +12,61 @@ body {
 	text-decoration:none;
 }
 
-/* Wrapper
+/* div contenedor de todo
 -------------------------------------------*/
-.powerSlide .wrapper {
+.powerSlide .wrapp {
 overflow: hidden;
 padding: 15px;
 position: relative;
 }
-/* Image
+/* posicion imagen
 -------------------------------------------*/
-.powerSlide .wrapper img {
+.powerSlide .wrapp img {
 position: absolute; /* They key to the “effects” approach */
 }
-/* Prev & Next buttons
+/* Previo & Siguiente botones para cambiar imagenes
 -------------------------------------------*/
-.powerSlide a.prev,
-.powerSlide a.next {
+.powerSlide .prev,
+.powerSlide .next {
 display: none;
-margin-top: -1em; /* Same as padding-top */
+margin-top: -1em; /* igual que el padding-top */
 padding: 1em 2em;
 position: absolute;
 text-decoration: none;
 top: 50%;
 }
-.powerSlide a.next {
+.powerSlide .next {
 right: 0;
 }
 /* Caption
 -------------------------------------------*/
-.powerSlide .wrapper p {
+
+/*.powerSlide .wrapper p {
 bottom: 0;
 display: none;
 padding: 1.5em;
 position: absolute;
-}
-/* Navigation
+}*/
+
+/* Navegacion para mover las imagenes donde un quiera
 -------------------------------------------*/
-.powerSlide .nav {
+.powerSlide .navegacion {
 margin: .5em 0;
 overflow: hidden;
 }
-.powerSlide .nav.thumbs {
-padding: 15px; /* Same as wrapper padding */
+.powerSlide .navegacion {
+padding: 15px; /* igual que el contendor de todo */
 }
-.powerSlide .nav img.thumb {
+.powerSlide .navegacion img.thumb {
 cursor: pointer;
 float: left;
 margin: 2px;
 position: relative;
 }
-.powerSlide .nav img.thumb.current { /* Current thumbnail */
+.powerSlide .navegacion img.thumb.current { /* miniatura actual */
 z-index: 999;
 }
-.powerSlide .nav a {
+.powerSlide .navegacion a {
 float:left;
 margin: .2em;
 min-width: 1em;
@@ -72,4 +74,4 @@ padding: .2em .7em;
 text-align: center;
 text-decoration: none;
 }
-.powerSlide .nav a.current {} /* Current bullet */
+.powerSlide .navegacion a.current {} /* check actual */
