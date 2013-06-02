@@ -3,39 +3,41 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link type="text/css" rel="stylesheet" href="..\css\sastyle.css" />
+    <link type="text/css" rel="stylesheet" href="..\css\slideanything.css" />
     <script type="text/javascript" src="..\js\jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="..\js\jquery.easing.min.js"></script>
     <script type="text/javascript" src="..\js\slideAnything.js"></script>
     <title>Demo | Style Anything </title>
 </head>
 <body style="background: #272822;">
+	<script type="text/javascript">
+        $( document ).ready(function() {
+        $('#slider_2').slideit();
+    });
+    </script>
 	<div style="margin: 0 auto 0; width: 960px;">
 		<div>
-			<ul class="slider">
+			<ul id="slider_1">
 				<li><img src=""></li>
 				<li><img src=""></li>
 				<li><img src=""></li>
 				<li><img src=""></li>
 			<ul>
-			<p>You can use Slide Anything with the traditional ul layout</p>
+			<br><p>You can use Slide Anything with the traditional ul layout</p>
 		</div>
 		<div style="margin-top: 20px;">
-			<div class="slider">
+			<div id="slider_2">
 				<div>
-					<img src="">
+					<img src="pic1.jpg">
 				</div>
 				<div>
-					<img src="">
+					<img src="pic2.jpg">
 				</div>
 				<div>
-					<img src="">
-				</div>
-				<div>
-					<img src="">
+					<img src="pic3.jpg">
 				</div>
 			</div>
-			<p>or use it with a list of container divs</p>
+			<br><p>or use it with a list of container divs</p>
 		</div>
 	</div> 	
 </body>

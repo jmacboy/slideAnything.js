@@ -1,77 +1,32 @@
-body
+.slideAnything /* div container of the slider */
 {
-    background-color: White;
     font-family: 'Open Sans' , "HelveticaNeue-Light" , "Helvetica Neue Light" , "Helvetica Neue" , Helvetica, Arial, sans-serif;
-}
-#contenedor /*div container*/
-{
-    height: 310px;
-    width: 620px;
     position: relative;
-    margin:100px auto;
-    padding:auto;
 }
 .listaimagenes /*container the list of div of images*/
 {
-    margin: 0px 0px -325px 0px;
+
 }
-.botonprev /*div container the button preview */
+
+.botonesnav div a  /*class container of the 'previous' anchor*/
 {
-    margin-right: auto;
-    width: 49px;
-    height: 37px;
-    background: white;
-    color: Black;
-    padding-top: 135px;
-}
-.botonprev a /*class container the anchor preview*/
-{
-    width: 49px;
-    height: 37px;
-    padding: 0px;
-    margin: 0px;
+    padding: 10px;
     position: absolute;
     background: white;
-    line-height: 17px;
+    text-decoration: none;
+    color: #000;
+    top: 42.33%;
 }
-.botonprev a:hover /*containing the anchor effect for effect when passing the pointer*/
+
+.botonesnav div a:hover /*containing the anchor effect for effect when passing the pointer*/
 {
-    width: 49px;
-    height: 37px;
-    background: #000;
-    color: #fff;
-}
-.botonnext      /*class container the button next*/
-{
-    width: 49px;
-    height: 37px;
-    background: white;
-    color: Black;
-    line-height: 17px;
-    margin: -33px 0px 0px auto;
-}
-.botonnext a  /*class container the anchor next*/
-{
-    width: 49px;
-    height: 37px;
-    padding: 0px;
-    margin: 0px;
-    position: absolute;
-    background: white;
-    line-height: 17px;
-}
-.botonnext a:hover      /*containing the anchor effect for effect when passing the pointer*/
-{
-    width: 49px;
-    height: 37px;
     background: #000;
     color: #fff;
 }
 
 .contenedornavegacion   /*div containing all navigation list*/
 {
-    margin-top: -60px;
-    padding: 230px;
+    margin-top: 10px;
 }
 .navegacion        /*UL class navigation, remove the list style*/
 {
@@ -89,6 +44,21 @@ body
     padding: 5px 10px;
     background: #000;
     color: #fff;
-    margin: 5px;
+    margin-right: 5px;
     text-decoration: none;
+}
+
+.navegacion li a:hover  /*hover css gimmick*/
+{
+    background: #ececeb;
+    color: #000;
+}
+
+.botonesnav /* acts as a wrapper to the previous and next buttons*/
+{
+
+}
+.hiddenElement
+{
+    display: none;
 }
