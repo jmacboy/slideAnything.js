@@ -1,0 +1,94 @@
+body
+{
+    background-color: White;
+    font-family: 'Open Sans' , "HelveticaNeue-Light" , "Helvetica Neue Light" , "Helvetica Neue" , Helvetica, Arial, sans-serif;
+}
+#contenedor /*div container*/
+{
+    height: 310px;
+    width: 620px;
+    position: relative;
+    margin:100px auto;
+    padding:auto;
+}
+.listaimagenes /*container the list of div of images*/
+{
+    margin: 0px 0px -325px 0px;
+}
+.botonprev /*div container the button preview */
+{
+    margin-right: auto;
+    width: 49px;
+    height: 37px;
+    background: white;
+    color: Black;
+    padding-top: 135px;
+}
+.botonprev a /*class container the anchor preview*/
+{
+    width: 49px;
+    height: 37px;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    background: white;
+    line-height: 17px;
+}
+.botonprev a:hover /*containing the anchor effect for effect when passing the pointer*/
+{
+    width: 49px;
+    height: 37px;
+    background: #000;
+    color: #fff;
+}
+.botonnext      /*class container the button next*/
+{
+    width: 49px;
+    height: 37px;
+    background: white;
+    color: Black;
+    line-height: 17px;
+    margin: -33px 0px 0px auto;
+}
+.botonnext a  /*class container the anchor next*/
+{
+    width: 49px;
+    height: 37px;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    background: white;
+    line-height: 17px;
+}
+.botonnext a:hover      /*containing the anchor effect for effect when passing the pointer*/
+{
+    width: 49px;
+    height: 37px;
+    background: #000;
+    color: #fff;
+}
+
+.contenedornavegacion   /*div containing all navigation list*/
+{
+    margin-top: -60px;
+    padding: 230px;
+}
+.navegacion        /*UL class navigation, remove the list style*/
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.navegacion li /*to align horizontally li*/
+{
+    float: left;
+}
+.navegacion li a  /*to style the list*/
+{
+    padding: 5px 10px;
+    background: #000;
+    color: #fff;
+    margin: 5px;
+    text-decoration: none;
+}
