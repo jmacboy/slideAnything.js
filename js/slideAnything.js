@@ -88,19 +88,6 @@ jQuery(document).ready(function () {
                     console.log('currentSlide: ' + currentSlide);
                     console.log($(element.children()[currentSlide]).html());
                     $(element.children()[currentSlide]).fadeIn(transition);
-                    /*element.children().each(function(){
-                        if( i === currentSlide){
-                            $(this).css({
-                                display: 'none'
-                            });
-                            $(this).fadeIn(transition);
-                        }else{
-                            $(this).css({
-                                display: 'none'
-                            });
-                        }
-                        i++;
-                    });*/
                 }
 
                 function HideDisplay(element){
@@ -120,19 +107,13 @@ jQuery(document).ready(function () {
                     - element: slider DOM
                 */
                 function SlideLoop(transTime, sliderLimit, element){
-                    //var trans = transTime;
-                    /*index = (index < 0) ? 0 : index;
-                    index = (index < sliderLimit)? index: 0;*/
-                    //console.log('started at currentSlide: ' + currentSlide);
                     HideDisplay(slider);// we hide the slides for now
                     console.log('started loop! currentSlide: ' + currentSlide);
                     AssignDisplay(element, transTime, sliderLimit);
                     currentSlide++;
                     SlideInterval = setInterval(function () {
-                        //console.log('slideInterval started');
                         HideDisplay(element);
                         AssignDisplay(element, transTime, sliderLimit);
-                        //console.log('change of Slide'+currentSlide+' sliderLimit: '+sliderLimit);
                         currentSlide++;
                     }, transTime);
                 }
@@ -145,7 +126,6 @@ jQuery(document).ready(function () {
                     return length;
                 }
             });
-            //return slider;
         }
 });
 
