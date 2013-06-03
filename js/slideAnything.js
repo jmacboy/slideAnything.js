@@ -28,7 +28,6 @@ jQuery(document).ready(function () {
 		// we create the div parent of the slider that'll contain our navigation arrows and points, as well as points.
         var sliderParent = '<div class="slideAnything" style="height: ' + options['height'] + 'px; width: ' + options['width'] + 'px; margin: 0px auto 0px;" />';
         slider.wrap(sliderParent);//wraps the element that called the function and inserts it into the parent of our slider
-        HideDisplay(slider);// we hide the slides for now
         sliderParent = slider.parent();// we re-use the parent variable and make it equal to the DOM parent that we created.
         /* Previous and Next Buttons
 			-----------------------------------------------*/
@@ -42,20 +41,19 @@ jQuery(document).ready(function () {
             var direction = $(this).html();
             if (direction === 'Prv') {
                 clearInterval(SlideInterval);
-                currentSlide = currentSlide-1;
-                AssignDisplay(slider, options['transition'], sliderLength);
-                SlideLoop(currentSlide, options['transition'], sliderLength, slider);
+                currentSlide = currentSlide - 2;
+                console.log('currentSlide: ' + currentSlide);
+                SlideLoop(options['transition'], sliderLength, slider);
+
             } else if (direction === 'Nxt') {
 
                 clearInterval(SlideInterval);
-                currentSlide = currentSlide + 1;
-                AssignDisplay(slider, options['transition'], sliderLength);
+                //currentSlide = currentSlide + 1;
+                console.log('currentSlide: ' + currentSlide);
+                //AssignDisplay(slider, options['transition'], sliderLength);
                 SlideLoop(options['transition'], sliderLength, slider);
 
             }
-            
-
-
         });
         
         
@@ -81,7 +79,8 @@ jQuery(document).ready(function () {
             function AssignDisplay(element,transition, length){
                 currentSlide = (currentSlide < 0) ? length-1 : currentSlide;
                 currentSlide = (currentSlide < (length)) ? currentSlide : 0;
-                console.log('currentSlide: '+currentSlide);
+                console.log('currentSlide: ' + currentSlide);
+                console.log($(element.children()[currentSlide]).html());
                 $(element.children()[currentSlide]).fadeIn(transition);
                 /*element.children().each(function(){
                     if( i === currentSlide){
@@ -119,14 +118,16 @@ jQuery(document).ready(function () {
                 //var trans = transTime;
                 /*index = (index < 0) ? 0 : index;
                 index = (index < sliderLimit)? index: 0;*/
+                //console.log('started at currentSlide: ' + currentSlide);
+                HideDisplay(slider);// we hide the slides for now
+                console.log('started loop! currentSlide: ' + currentSlide);
                 AssignDisplay(element, transTime, sliderLimit);
-                console.log('started loop! currentSlide: '+currentSlide);
                 currentSlide++;
                 SlideInterval = setInterval(function () {
                     //console.log('slideInterval started');
                     HideDisplay(element);
                     AssignDisplay(element, transTime, sliderLimit);
-                    console.log('change of Slide'+currentSlide+' sliderLimit: '+sliderLimit);
+                    //console.log('change of Slide'+currentSlide+' sliderLimit: '+sliderLimit);
                     currentSlide++;
                 }, transTime);
             }
