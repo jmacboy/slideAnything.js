@@ -1,5 +1,5 @@
 
-var SildeInterval = 0;
+var SlideInterval = 0;
 var currentSlide = 0;
 
 jQuery(document).ready(function () {
@@ -23,7 +23,7 @@ jQuery(document).ready(function () {
                 'margin': 0,
                 'padding': 0
             });
-        sliderLength = AssignDisplay(0, slider, options['transition']);
+        sliderLength = sliderSize(slider);//AssignDisplay(0, slider, options['transition']);
         /* Container
 			-----------------------------------------------*/
 		// we create the div parent of the slider that'll contain our navigation arrows and points, as well as points.
@@ -36,6 +36,29 @@ jQuery(document).ready(function () {
         						'<div style="line-height: 17px;" ><a href="#" style="left: 0;">Prv</a></div>'+
         						'<div style="line-height: 17px;" ><a href="#" style="right: 0;">Nxt</a></div>'+
         						'</div>');//adding the previous and next buttons
+        $('.botonesnav div a').click(function () {
+
+
+            var direction = $(this).html();
+            if (direction === 'Prv') {
+                clearInterval(SlideInterval);
+                currentSlide = currentSlide-1;
+                AssignDisplay(currentSlide, slider, options['transition']);
+                SlideLoop(currentSlide, options['transition'], sliderLength, slider);
+            } else if (direction === 'Nxt') {
+
+                clearInterval(SlideInterval);
+                currentSlide = currentSlide + 1;
+                AssignDisplay(currentSlide, slider, options['transition']);
+                SlideLoop(currentSlide, options['transition'], sliderLength, slider);
+
+            }
+            
+
+
+        });
+        
+        
         /* Nav Points 
 			-----------------------------------------------*/
         //and to finally end the html setup we add the nav points that are created based on the number of objects the slider contains
@@ -57,10 +80,9 @@ jQuery(document).ready(function () {
         - index: which index will be the 'current' element which will be visible.
         - element: the DOM element which was user defined to be a slider.
     */
-    function AssignDisplay(index, element,transition){
-        var i = 0;
-        /*var sliderType = element.prop('tagName');
-        var tagType = (sliderType === 'UL')? 'li': 'div';*/
+    function AssignDisplay(index, element,transition, length){
+        index = (index < 0) ? 0 : index;
+        var i = (index < (length-1)) ? index : 0;
         element.children().each(function(){
             if( i === index){
                 $(this).css({
@@ -74,11 +96,6 @@ jQuery(document).ready(function () {
             }
             i++;
         });
-        /*
-            in an early attempt at multi-tasking the function it returns how many children
-            the slider has to know how many navPoints there needs to be.
-        */
-        return i;
     }
 
     /*
@@ -89,20 +106,31 @@ jQuery(document).ready(function () {
         - sliderLimit: number of slides that the slider has
         - element: slider DOM
     */
-            function SlideLoop(index, transTime, sliderLimit, element){
-                //var trans = transTime;
-                var i = (index < sliderLimit)? index: 0;
-                SlideInterval = setInterval(function(){
-                    if(i === (sliderLimit)){
-                        i = 0;
-                    }
-                    AssignDisplay(i, element, transTime);
-                    console.log('change of Slide'+i+' sliderLimit: '+sliderLimit);
-                    i++;
-                }, transTime);
+    function SlideLoop(index, transTime, sliderLimit, element){
+        //var trans = transTime;
+        index = (index < 0) ? 0 : index;
+        index = (index < sliderLimit)? index: 0;
+        AssignDisplay(index, element, transTime, sliderLimit);
+        SlideInterval = setInterval(function () {
+            if(index === (sliderLimit)){
+                index = 0;
             }
+            currentSlide = index;
+            AssignDisplay(index, element, transTime);
+            console.log('change of Slide'+i+' sliderLimit: '+sliderLimit);
+            index++;
+        }, transTime);
+    }
          
- 
+    function sliderSize(element) {
+        var length = 0;
+        
+        element.children().each(function () {
+            length++;
+        });
+
+
+    }
 
 });
 
