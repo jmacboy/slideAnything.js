@@ -1,7 +1,3 @@
-
-var SildeInterval = 0;
-var currentSlide = 0;
-
 jQuery(document).ready(function () {
     $.fn.slideit = function (options) { 
  		/*
@@ -10,8 +6,7 @@ jQuery(document).ready(function () {
         */
         var defaults = {
             width: 620,
-            height: 310,
-            transition: 3000
+            height: 310
         };
 
 		options = $.extend(defaults, options);
@@ -23,7 +18,7 @@ jQuery(document).ready(function () {
                 'margin': 0,
                 'padding': 0
             });
-        sliderLength = AssignDisplay(0, slider, options['transition']);
+        sliderLength = AssignDisplay(0, slider);
         /* Container
 			-----------------------------------------------*/
 		// we create the div parent of the slider that'll contain our navigation arrows and points, as well as points.
@@ -47,7 +42,6 @@ jQuery(document).ready(function () {
        	}
        	navPoints += '</ul></div>';
        	sliderParent.append(navPoints);
-       	SlideLoop(0, options['transition'], sliderLength, slider);
         return slider;
     }
 
@@ -57,16 +51,15 @@ jQuery(document).ready(function () {
         - index: which index will be the 'current' element which will be visible.
         - element: the DOM element which was user defined to be a slider.
     */
-    function AssignDisplay(index, element,transition){
+    function AssignDisplay(index, element){
         var i = 0;
         /*var sliderType = element.prop('tagName');
         var tagType = (sliderType === 'UL')? 'li': 'div';*/
         element.children().each(function(){
             if( i === index){
                 $(this).css({
-                    display: 'none'
+                    display: 'block'
                 });
-                $(this).fadeIn(transition);
             }else{
                 $(this).css({
                     display: 'none'
@@ -80,29 +73,4 @@ jQuery(document).ready(function () {
         */
         return i;
     }
-
-    /*
-        function that's used for creating the loop that'll change the slides at a specific interval
-        Parameters:
-        - index: refers to which slide it will change into
-        - transTime: interval at which the function will change
-        - sliderLimit: number of slides that the slider has
-        - element: slider DOM
-    */
-            function SlideLoop(index, transTime, sliderLimit, element){
-                //var trans = transTime;
-                var i = (index < sliderLimit)? index: 0;
-                SlideInterval = setInterval(function(){
-                    if(i === (sliderLimit)){
-                        i = 0;
-                    }
-                    AssignDisplay(i, element, transTime);
-                    console.log('change of Slide'+i+' sliderLimit: '+sliderLimit);
-                    i++;
-                }, transTime);
-            }
-         
- 
-
 });
-
