@@ -1,9 +1,8 @@
 
-var SlideInterval = 0;
-var currentSlide = 0;
-
 jQuery(document).ready(function () {
-    $.fn.slideit = function (options) { 
+    $.fn.slideit = function (options) {
+        var SlideInterval = 0;
+        var currentSlide = 0;
  		/*
         	Initial values that the slider will have by default. 
         	user CAN put a custom width and height.
@@ -29,6 +28,7 @@ jQuery(document).ready(function () {
 		// we create the div parent of the slider that'll contain our navigation arrows and points, as well as points.
         var sliderParent = '<div class="slideAnything" style="height: ' + options['height'] + 'px; width: ' + options['width'] + 'px; margin: 0px auto 0px;" />';
         slider.wrap(sliderParent);//wraps the element that called the function and inserts it into the parent of our slider
+        HideDisplay(slider);// we hide the slides for now
         sliderParent = slider.parent();// we re-use the parent variable and make it equal to the DOM parent that we created.
         /* Previous and Next Buttons
 			-----------------------------------------------*/
@@ -43,14 +43,14 @@ jQuery(document).ready(function () {
             if (direction === 'Prv') {
                 clearInterval(SlideInterval);
                 currentSlide = currentSlide-1;
-                AssignDisplay(currentSlide, slider, options['transition']);
+                AssignDisplay(slider, options['transition'], sliderLength);
                 SlideLoop(currentSlide, options['transition'], sliderLength, slider);
             } else if (direction === 'Nxt') {
 
                 clearInterval(SlideInterval);
                 currentSlide = currentSlide + 1;
-                AssignDisplay(currentSlide, slider, options['transition']);
-                SlideLoop(currentSlide, options['transition'], sliderLength, slider);
+                AssignDisplay(slider, options['transition'], sliderLength);
+                SlideLoop(options['transition'], sliderLength, slider);
 
             }
             
@@ -70,67 +70,76 @@ jQuery(document).ready(function () {
        	}
        	navPoints += '</ul></div>';
        	sliderParent.append(navPoints);
-       	SlideLoop(0, options['transition'], sliderLength, slider);
-        return slider;
-    }
-
-    /*
-        function that's primarily used for assigning the visibility
-        > Parameters:
-        - index: which index will be the 'current' element which will be visible.
-        - element: the DOM element which was user defined to be a slider.
-    */
-    function AssignDisplay(index, element,transition, length){
-        index = (index < 0) ? 0 : index;
-        var i = (index < (length-1)) ? index : 0;
-        element.children().each(function(){
-            if( i === index){
-                $(this).css({
-                    display: 'none'
-                });
-                $(this).fadeIn(transition);
-            }else{
-                $(this).css({
-                    display: 'none'
-                });
-            }
-            i++;
-        });
-    }
-
-    /*
-        function that's used for creating the loop that'll change the slides at a specific interval
-        Parameters:
-        - index: refers to which slide it will change into
-        - transTime: interval at which the function will change
-        - sliderLimit: number of slides that the slider has
-        - element: slider DOM
-    */
-    function SlideLoop(index, transTime, sliderLimit, element){
-        //var trans = transTime;
-        index = (index < 0) ? 0 : index;
-        index = (index < sliderLimit)? index: 0;
-        AssignDisplay(index, element, transTime, sliderLimit);
-        SlideInterval = setInterval(function () {
-            if(index === (sliderLimit)){
-                index = 0;
-            }
-            currentSlide = index;
-            AssignDisplay(index, element, transTime);
-            console.log('change of Slide'+i+' sliderLimit: '+sliderLimit);
-            index++;
-        }, transTime);
-    }
-         
-    function sliderSize(element) {
-        var length = 0;
+       	SlideLoop(options['transition'], sliderLength, slider);
         
-        element.children().each(function () {
-            length++;
-        });
+            /*
+            function that's primarily used for assigning the visibility
+            > Parameters:
+            - index: which index will be the 'current' element which will be visible.
+            - element: the DOM element which was user defined to be a slider.
+            */
+            function AssignDisplay(element,transition, length){
+                currentSlide = (currentSlide < 0) ? length-1 : currentSlide;
+                currentSlide = (currentSlide < (length)) ? currentSlide : 0;
+                console.log('currentSlide: '+currentSlide);
+                $(element.children()[currentSlide]).fadeIn(transition);
+                /*element.children().each(function(){
+                    if( i === currentSlide){
+                        $(this).css({
+                            display: 'none'
+                        });
+                        $(this).fadeIn(transition);
+                    }else{
+                        $(this).css({
+                            display: 'none'
+                        });
+                    }
+                    i++;
+                });*/
+            }
+
+            function HideDisplay(element){
+                element.children().each(function(){
+                    $(this).css({
+                        display: 'none'
+                    });
+                });
+            }
 
 
-    }
-
+            /*
+                function that's used for creating the loop that'll change the slides at a specific interval
+                Parameters:
+                - index: refers to which slide it will change into
+                - transTime: interval at which the function will change
+                - sliderLimit: number of slides that the slider has
+                - element: slider DOM
+            */
+            function SlideLoop(transTime, sliderLimit, element){
+                //var trans = transTime;
+                /*index = (index < 0) ? 0 : index;
+                index = (index < sliderLimit)? index: 0;*/
+                AssignDisplay(element, transTime, sliderLimit);
+                console.log('started loop! currentSlide: '+currentSlide);
+                currentSlide++;
+                SlideInterval = setInterval(function () {
+                    //console.log('slideInterval started');
+                    HideDisplay(element);
+                    AssignDisplay(element, transTime, sliderLimit);
+                    console.log('change of Slide'+currentSlide+' sliderLimit: '+sliderLimit);
+                    currentSlide++;
+                }, transTime);
+            }
+                 
+            function sliderSize(element) {
+                var length = 0;
+                element.children().each(function () {
+                    length++;
+                });
+                return length;
+            }
+            
+            return slider;
+        }
 });
 
