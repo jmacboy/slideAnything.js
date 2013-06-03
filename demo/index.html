@@ -12,17 +12,32 @@
 <body style="background: #272822;">
 	<script type="text/javascript">
         $( document ).ready(function() {
-        $('#slider_1').slideit();
-        $('#slider_2').slideit();
+        $('#slider_1').slideit({
+        	width: 700,
+        	height: 400,
+        	transition: 5000
+        });
+        $('#slider_2').slideit({
+        	width: 620,
+        	height: 310,
+        	transition: 2500
+        });
     });
     </script>
 	<div style="margin: 0 auto 0; width: 960px;">
+		<h1 style="color: #fff;">Slide Anything</h1>
 		<ul id="slider_1">
 			<li><img src="pic1.jpg"></li>
-			<li><img src="pic2.jpg"></li>
+			<li><div style ="height: 310px; width: 100%; padding-top: 4px; padding-left: 80px; color: #fff;">
+					<form>
+					<div style="margin-top: 100px; margin-left: 50px">First name: <input type="text" name="firstname"></div><br>
+					<div style="margin-left: 50px">Last name: <input type="text" name="lastname"></div>
+					</form>
+				</div>
+			</li>
 			<li><img src="pic3.jpg"></li>
 		</ul>
-		<br><p>You can use Slide Anything with the traditional ul layout</p><br>
+		<br><p style="color: #fff; font: 17px arial,sans-serif; margin-top: 39px; padding-left: 169px;">You can use Slide Anything with the traditional ul layout</p><br>
 		<div style="margin-top: 20px;">
 			<div id="slider_2">
 				<div>
@@ -35,7 +50,7 @@
 					<img src="pic6.jpg">
 				</div>
 			</div>
-			<br><p>or use it with a list of container divs</p>
+			<br><p style="color: #fff; font: 17px arial,sans-serif; margin-top: 39px; padding-left: 169px;">Or use it with a list of container divs</p>
 		</div>
 	</div> 	
 </body>
