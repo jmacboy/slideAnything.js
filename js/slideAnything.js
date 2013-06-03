@@ -1,9 +1,7 @@
 
 jQuery(document).ready(function () {
     $.fn.slideit = function (options) {
-        var SlideInterval = 0;
-        var currentSlide = 0;
- 		/*
+        /*
         	Initial values that the slider will have by default. 
         	user CAN put a custom width and height.
         */
@@ -16,7 +14,8 @@ jQuery(document).ready(function () {
 		options = $.extend(defaults, options);
 
         return this.each(function(){
-            
+            var SlideInterval = 0;
+            var currentSlide = 0;
             var sliderLength = 0;
             var slider = $(this);
             /* list of css specifically set due to the possible use of a UL element. */
@@ -35,25 +34,20 @@ jQuery(document).ready(function () {
             /* Previous and Next Buttons
     			-----------------------------------------------*/
             sliderParent.append('<div class="botonesnav">'+
-            						'<div style="line-height: 17px;" ><a href="#" style="left: 0;">Prv</a></div>'+
-            						'<div style="line-height: 17px;" ><a href="#" style="right: 0;">Nxt</a></div>'+
+            						'<div style="line-height: 17px;" ><a href="javascript:void(0)" style="left: 0;">Prv</a></div>'+
+            						'<div style="line-height: 17px;" ><a href="javascript:void(0)" style="right: 0;">Nxt</a></div>'+
             						'</div>');//adding the previous and next buttons
-            $('.botonesnav div a').click(function () {
-
-
+            //event for the navigation arrows (Prv and Nxt)
+            sliderParent.find('.botonesnav div a').click(function () {
                 var direction = $(this).html();
                 if (direction === 'Prv') {
                     clearInterval(SlideInterval);
                     currentSlide = currentSlide - 2;
                     console.log('currentSlide: ' + currentSlide);
                     SlideLoop(options['transition'], sliderLength, slider);
-
                 } else if (direction === 'Nxt') {
-
                     clearInterval(SlideInterval);
-                    //currentSlide = currentSlide + 1;
                     console.log('currentSlide: ' + currentSlide);
-                    //AssignDisplay(slider, options['transition'], sliderLength);
                     SlideLoop(options['transition'], sliderLength, slider);
 
                 }
@@ -67,11 +61,20 @@ jQuery(document).ready(function () {
             					'<ul class="navegacion">';
             for (var i = 0;  i < sliderLength; i++) {
             		var idx = i+1;
-           			navPoints+= '<li><a href="#">'+idx+'</a></li>';
+           			navPoints+= '<li><a href="javascript:void(0)">'+idx+'</a></li>';
            	}
            	navPoints += '</ul></div>';
            	sliderParent.append(navPoints);
-           	SlideLoop(options['transition'], sliderLength, slider);
+            /*
+                Nav Point event function: you get the index from the derived value (n-1) from the <a> inside the <ul> that acts as the navpoint.
+                and simply call SlideLoop();
+            */ 
+           	sliderParent.find('.contenedornavegacion ul li a').click(function(){
+                currentSlide = $(this).html()-1;
+                clearInterval(SlideInterval);//never forget to call clearInterval before calling SlideLoop
+                SlideLoop(options['transition'], sliderLength, slider);
+            });
+            SlideLoop(options['transition'], sliderLength, slider);
             
                 /*
                 function that's primarily used for assigning the visibility
