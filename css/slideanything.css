@@ -27,6 +27,8 @@
 .contenedornavegacion   /*div containing all navigation list*/
 {
     margin-top: 10px;
+    position: absolute;
+    bottom: 0;
 }
 .navegacion        /*UL class navigation, remove the list style*/
 {

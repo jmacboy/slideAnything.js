@@ -91,10 +91,8 @@ jQuery(document).ready(function () {
                 }
 
                 function HideDisplay(element){
-                    element.children().each(function(){
-                        $(this).css({
+                    element.children().css({
                             display: 'none'
-                        });
                     });
                 }
 
